@@ -13,11 +13,13 @@ use std::str::FromStr;
 /// let scheme = "http".parse::<Scheme>().unwrap();
 /// assert_eq!(scheme, Scheme::Http);
 ///
-/// assert!("https".parse::<Scheme>().is_err());
+/// let https_scheme = "https".parse::<Scheme>().unwrap();
+/// assert_eq!(https_scheme, Scheme::Https);
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Scheme {
     Http,
+    Https,
 }
 
 impl FromStr for Scheme {
@@ -26,6 +28,7 @@ impl FromStr for Scheme {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "http" => Ok(Scheme::Http),
+            "https" => Ok(Scheme::Https),
             _ => Err(anyhow!("Unsupported scheme: {}", s)),
         }
     }
@@ -43,10 +46,10 @@ mod tests {
     }
 
     #[test]
-    fn test_scheme_from_str_https_unsupported() {
+    fn test_scheme_from_str_https() {
         let result = "https".parse::<Scheme>();
-        assert!(result.is_err());
-        assert_eq!(result.unwrap_err().to_string(), "Unsupported scheme: https");
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap(), Scheme::Https);
     }
 
     #[test]
