@@ -1,5 +1,6 @@
 //! Core library for the web browser implementation.
 
+pub mod browser;
 pub mod connection;
 pub mod host;
 pub mod path;

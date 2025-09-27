@@ -1,5 +1,5 @@
 [package]
-name = "web-browser-engineering-rs"
+name = "browser"
 version = "0.1.0"
 edition = "2024"
 
@@ -9,3 +9,13 @@ cfg-if = "1.0"
 rustls = "0.23"
 webpki-roots = "0.26"
 rustls-pki-types = "1"
+fltk = "^1.5"
+sdl2 = { version = "0.36", features = ["ttf"] }
+
+[[bin]]
+name = "gui_example"
+path = "src/gui_example.rs"
+
+[[bin]]
+name = "sdl2_example"
+path = "src/sdl2_example.rs"
